@@ -12,7 +12,7 @@ class LaravelTimezoneRequest extends FormRequest
             'timezone' => [
                 'required',
                 'string',
-                'in:' . join(',', config('timezone.allowed_timezones')),
+                'in:'.implode(',', config('timezone.allowed_timezones')),
             ],
         ];
     }
