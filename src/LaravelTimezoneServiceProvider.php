@@ -4,7 +4,6 @@ namespace Sawirricardo\LaravelTimezone;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Sawirricardo\LaravelTimezone\Commands\LaravelTimezoneCommand;
 
 class LaravelTimezoneServiceProvider extends PackageServiceProvider
 {
