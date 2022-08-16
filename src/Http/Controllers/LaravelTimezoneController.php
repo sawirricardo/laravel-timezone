@@ -2,7 +2,6 @@
 
 namespace Sawirricardo\LaravelTimezone\Http\Controllers;
 
-use Illuminate\Support\Facades\Cache;
 use Sawirricardo\LaravelTimezone\Requests\LaravelTimezoneRequest;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,12 +9,19 @@ class LaravelTimezoneController
 {
     public function __invoke(LaravelTimezoneRequest $request)
     {
-        Cache::remember(
-            "timezone." . clientIp(),
-            now()->addHour(),
-            fn () => $request->string('timezone')->toString()
-        );
+        match (config('timezone.driver')) {
+            'session' => session()->put($this->getKey(), $request->timezone),
+            default => cache()->rememberForever(
+                $this->getKey(),
+                fn () => $request->timezone
+            ),
+        };
 
         return response()->noContent(Response::HTTP_CREATED);
+    }
+
+    protected function getKey()
+    {
+        return "timezone." . clientIp();
     }
 }
