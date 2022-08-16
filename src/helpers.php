@@ -4,10 +4,10 @@ if (! function_exists('currentTimezone')) {
     function currentTimezone($ip = null)
     {
         if (config('timezone.driver') === 'session') {
-            return session('timezone.' . $ip ??= clientIp()) ?? config('app.timezone');
+            return session('timezone.'.$ip ??= clientIp()) ?? config('app.timezone');
         }
 
-        return cache()->get('timezone.' . $ip ??= clientIp()) ?? config('app.timezone');
+        return cache()->get('timezone.'.$ip ??= clientIp()) ?? config('app.timezone');
     }
 }
 

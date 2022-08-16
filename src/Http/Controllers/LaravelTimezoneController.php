@@ -25,6 +25,6 @@ class LaravelTimezoneController
 
     protected function getKey()
     {
-        return 'timezone.' . clientIp();
+        return 'timezone.'.clientIp();
     }
 }
