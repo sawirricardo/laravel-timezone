@@ -19,7 +19,7 @@ it('stores the timezone into session if specified', function () {
 
     postJson(route('laravel-timezone'), ['timezone' => 'Europe/Berlin'])
         ->assertCreated()
-        ->assertSessionHas('timezone.' . clientIp(), 'Europe/Berlin');
+        ->assertSessionHas('timezone.'.clientIp(), 'Europe/Berlin');
 
     expect(currentTimezone())->toBe('Europe/Berlin');
 });
