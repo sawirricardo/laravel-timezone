@@ -4,9 +4,9 @@ namespace Sawirricardo\LaravelTimezone;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Sawirricardo\LaravelTimezone\Components\LaravelTimezoneComponent;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Sawirricardo\LaravelTimezone\Components\LaravelTimezoneComponent;
 
 class LaravelTimezoneServiceProvider extends PackageServiceProvider
 {

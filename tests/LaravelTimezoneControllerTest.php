@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
-
 use function Pest\Laravel\postJson;
 
 it('stores the timezone into the session', function () {
