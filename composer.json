@@ -30,18 +30,21 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "spatie/pest-plugin-snapshots": "^1.1"
     },
     "autoload": {
         "psr-4": {
-            "Sawirricardo\\LaravelTimezone\\": "src",
-            "Sawirricardo\\LaravelTimezone\\Database\\Factories\\": "database/factories"
+            "Sawirricardo\\LaravelTimezone\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Sawirricardo\\LaravelTimezone\\Tests\\": "tests"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
