@@ -11,7 +11,7 @@ class LaravelTimezoneController
     public function __invoke(LaravelTimezoneRequest $request)
     {
         Cache::remember(
-            "timezone." . getIp(),
+            "timezone." . clientIp(),
             now()->addHour(),
             fn () => $request->string('timezone')->toString()
         );
