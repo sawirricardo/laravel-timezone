@@ -3,7 +3,11 @@
 if (! function_exists('currentTimezone')) {
     function currentTimezone($ip = null)
     {
-        return cache('timezone.' . $ip ??= clientIp()) ?? config('app.timezone');
+        return match (config('timezone.driver')) {
+            'session' => session('timezone.' . $ip ??= clientIp()),
+            default => cache('timezone.' . $ip ??= clientIp()),
+        }
+        ?? config('app.timezone');
     }
 }
 
