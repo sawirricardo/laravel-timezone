@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-timezone` will be documented in this file.
 
+## 0.1.2 - 2022-08-16
+
+fix minor
+
 ## 0.1.1 - 2022-08-16
 
 fix formatting issue with packagist
