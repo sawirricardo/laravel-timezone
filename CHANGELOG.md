@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-timezone` will be documented in this file.
 
+## 0.2.0 - 2022-08-16
+
+new Events:
+
+- UpdatingTimezone
+- TimezoneUpdated
+
+enabling consumer to hook their app.
+
 ## 0.1.3 - 2022-08-16
 
 fix autoload helpers
