@@ -9,19 +9,22 @@ class LaravelTimezoneController
 {
     public function __invoke(LaravelTimezoneRequest $request)
     {
-        match (config('timezone.driver')) {
-            'session' => session()->put($this->getKey(), $request->timezone),
-            default => cache()->rememberForever(
-                $this->getKey(),
-                fn () => $request->timezone
-            ),
-        };
+        if (config('timezone.driver') === 'session') {
+            session()->put($this->getKey(), $request->timezone);
+
+            return response()->noContent(Response::HTTP_CREATED);
+        }
+
+        cache()->rememberForever(
+            $this->getKey(),
+            fn () => $request->timezone
+        );
 
         return response()->noContent(Response::HTTP_CREATED);
     }
 
     protected function getKey()
     {
-        return 'timezone.'.clientIp();
+        return 'timezone.' . clientIp();
     }
 }
