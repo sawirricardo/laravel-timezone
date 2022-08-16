@@ -36,15 +36,15 @@
     "autoload": {
         "psr-4": {
             "Sawirricardo\\LaravelTimezone\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Sawirricardo\\LaravelTimezone\\Tests\\": "tests"
         },
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sawirricardo\\LaravelTimezone\\Tests\\": "tests"
+        }
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
