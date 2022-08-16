@@ -1,4 +1,3 @@
-
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
 
 # Use Timezone in your laravel app
@@ -8,7 +7,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/sawirricardo/laravel-timezone/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/sawirricardo/laravel-timezone/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/sawirricardo/laravel-timezone.svg?style=flat-square)](https://packagist.org/packages/sawirricardo/laravel-timezone)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package takes a different approach to handle different timezone for your user.
 
 ## Support us
 
@@ -26,13 +25,6 @@ You can install the package via composer:
 composer require sawirricardo/laravel-timezone
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-timezone-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
@@ -43,6 +35,19 @@ This is the contents of the published config file:
 
 ```php
 return [
+    // possible options: session, cache
+    'driver' => 'cache',
+
+    'url' => 'laravel-timezone',
+    'controller' => \Sawirricardo\LaravelTimezone\Http\Controllers\LaravelTimezoneController::class,
+
+    'allowed_timezones' => [
+        ...timezone_identifiers_list(),
+    ],
+
+    'middleware' => [
+        'web',
+    ],
 ];
 ```
 
@@ -55,8 +60,27 @@ php artisan vendor:publish --tag="laravel-timezone-views"
 ## Usage
 
 ```php
-$laravelTimezone = new Sawirricardo\LaravelTimezone();
-echo $laravelTimezone->echoPhrase('Hello, Sawirricardo!');
+echo currentTimezone(); // UTC
+```
+
+```blade
+{{-- Just put this in your layout file --}}
+<x-laravel-timezone />
+```
+
+These should be enough for most cases, however, if you have a different case, you can try hit the route endpoint and supply the timezone param to the request, for example:
+
+```html
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        axios
+            .post("{{ route('laravel-timezone') }}", {
+                timezone: timezone,
+            })
+            .catch((error) => null);
+    });
+</script>
 ```
 
 ## Testing
@@ -79,8 +103,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [sawirricardo](https://github.com/sawirricardo)
-- [All Contributors](../../contributors)
+-   [sawirricardo](https://github.com/sawirricardo)
+-   [All Contributors](../../contributors)
 
 ## License
 
