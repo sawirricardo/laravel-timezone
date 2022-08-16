@@ -1,5 +1,9 @@
 <?php
 
+use Sawirricardo\LaravelTimezone\Events\TimezoneUpdated;
+use Sawirricardo\LaravelTimezone\Events\UpdatingTimezone;
+
+use function Pest\Laravel\expectsEvents;
 use function Pest\Laravel\postJson;
 
 it('stores the timezone into the session', function () {
@@ -22,4 +26,11 @@ it('stores the timezone into session if specified', function () {
         ->assertSessionHas('timezone.'.clientIp(), 'Europe/Berlin');
 
     expect(currentTimezone())->toBe('Europe/Berlin');
+});
+
+it('fires events when the timezone is updated', function () {
+    expectsEvents([UpdatingTimezone::class, TimezoneUpdated::class]);
+
+    postJson(route('laravel-timezone'), ['timezone' => 'Europe/Berlin'])
+        ->assertCreated();
 });
