@@ -15,3 +15,13 @@ it('throws validation errors when the timezone is not valid', function () {
         ->assertUnprocessable();
     expect(currentTimezone())->toBeString(config('app.timezone'));
 });
+
+it('stores the timezone into session if specified', function () {
+    config()->set('timezone.driver', 'session');
+
+    postJson(route('laravel-timezone'), ['timezone' => 'Europe/Berlin'])
+        ->assertCreated()
+        ->assertSessionHas('timezone.' . clientIp(), 'Europe/Berlin');
+
+    expect(currentTimezone())->toBe('Europe/Berlin');
+});
